@@ -8,9 +8,12 @@ const Project = (name) => {
       removeTodo(todoId) {
         this.todos = this.todos.filter(todo => todo.id !== todoId);
       },
+      findTodo(todoId) {
+        return this.todos.find(todo => todo.id === todoId);
+    }
     };
   };
   
   // Default project
-  const DefaultProject = Project('Inbox');
+  const DefaultProject = Project('Personal');
   export { Project, DefaultProject };
