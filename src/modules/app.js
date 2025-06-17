@@ -84,6 +84,7 @@ export default class App {
     render() {
         const activeProject = this.getActiveProject();
         UI.renderProjects(this.projects, this.activeProjectId);
+        // const deleteBtn = document.getElementById('delete-project-btn');
         
         if (activeProject) {
             UI.renderTodos(activeProject.todos);
@@ -92,6 +93,7 @@ export default class App {
             document.getElementById('project-title').textContent = 'No Projects';
             document.getElementById('todos-container').innerHTML = 
                 '<p class="empty-state">Create a project to get started!</p>';
+                deleteBtn.classList.add('hidden');
         }
     }
 
@@ -118,6 +120,11 @@ export default class App {
             UI.hideModal('project-modal');
             UI.clearForm('project-form');
         });
+
+        //Delete Project Btn
+        document.getElementById('delete-project-btn').addEventListener('click', () => {
+          this.deleteProject();
+      });
 
         // Add new todo
         document.getElementById('add-todo-btn').addEventListener('click', () => {
@@ -234,4 +241,27 @@ export default class App {
         this.render();
       }
     }
+
+    deleteProject() {
+      if (!this.activeProjectId) return;
+      
+      // Confirm deletion
+      if (!confirm('Are you sure you want to delete this project and all its tasks?')) {
+          return;
+      }
+      
+      // Find project index
+      const projectIndex = this.projects.findIndex(p => p.id === this.activeProjectId);
+      if (projectIndex === -1) return;
+      
+      // Remove project
+      this.projects.splice(projectIndex, 1);
+      
+      // Update active project
+      this.activeProjectId = this.projects.length > 0 ? this.projects[0].id : null;
+      
+      // Save and render
+      this.saveData();
+      this.render();
+  }
 }

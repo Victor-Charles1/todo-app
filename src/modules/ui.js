@@ -22,13 +22,16 @@ export default class UI {
         
         // Main Content
         const content = document.createElement('main');
-        content.className = 'content';
-        content.innerHTML = `
+    content.className = 'content';
+    content.innerHTML = `
+        <div class="project-header">
             <h1 id="project-title">All Tasks</h1>
-            <div id="todos-container" class="todos-grid"></div>
-            <button id="add-todo-btn">+ New Task</button>
-        `;
-        container.appendChild(content);
+            <button id="delete-project-btn" class="delete-btn" title="Delete Project">🗑️</button>
+        </div>
+        <div id="todos-container" class="todos-grid"></div>
+        <button id="add-todo-btn">+ New Task</button>
+    `;
+    container.appendChild(content);
         
         // Create modals
         this.createModal('project-modal', 'New Project', 'project-form', [
@@ -163,8 +166,9 @@ export default class UI {
     <div class="todo-footer">
       <span class="date">${formattedDate}</span>
       <div class="actions">
-        <button class="complete-btn">${todo.completed ? 'Undo' : 'Complete'}</button>
-        <!-- ... -->
+        <button class="complete-btn">${todo.completed ? 'Uncomplete' : 'Complete'}</button>
+        <button class="edit-btn">Edit</button>
+        <button class="delete-btn">Delete</button>
       </div>
     </div>
   `;
