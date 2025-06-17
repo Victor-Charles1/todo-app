@@ -1,4 +1,8 @@
+import { sampleTodo } from "./todo";
+
 // src/modules/project.js
+
+
 const Project = (name) => {
     return {
       id: Date.now().toString(),
@@ -16,4 +20,7 @@ const Project = (name) => {
   
   // Default project
   const DefaultProject = Project('Personal');
+  DefaultProject.addTodo(sampleTodo);
+  DefaultProject.id = 'default Id';
+
   export { Project, DefaultProject };

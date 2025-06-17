@@ -17,6 +17,9 @@ export default class UI {
             <h2>Projects</h2>
             <ul id="projects-list"></ul>
             <button id="add-project-btn">+ Add Project</button>
+            <div class="sidebar-footer">
+            <button id="clear-storage-btn" class="danger-btn">Clear All Data</button>
+        </div>
         `;
         container.appendChild(sidebar);
         

@@ -29,7 +29,7 @@ const createStorage = (Project, Todo) => {
     return todo;
   };
 
-  // Public API
+  // Public 
   return {
     saveProjects(projects) {
       try {
@@ -98,34 +98,7 @@ const createStorage = (Project, Todo) => {
       }
     },
 
-    initializeWithSampleData() {
-      if (localStorage.getItem('projects')) return;
-      
-      const personal = Project('Personal');
-      personal.id = 'personal';
-      personal.todos = [
-        Todo(
-          'Buy groceries',
-          'Milk, eggs, bread, fruits',
-          new Date().toISOString().split('T')[0],
-          'medium'
-        )
-      ];
-      
-      const work = Project('Work');
-      work.id = 'work';
-      work.todos = [
-        Todo(
-          'Prepare presentation',
-          'Quarterly review for stakeholders',
-          new Date(Date.now() + 86400000).toISOString().split('T')[0],
-          'high'
-        )
-      ];
-      
-      this.saveProjects([personal, work]);
-      this.saveActiveProject('personal');
-    }
+
   };
 };
 

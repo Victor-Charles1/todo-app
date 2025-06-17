@@ -1,21 +1,5 @@
 // src/modules/todo.js
-// import { parseISO } from "date-fns";
-// const Todo = (title, description, dueDate, priority) => {
-//   // Convert string to Date object if needed
-//   const parsedDueDate = typeof dueDate === 'string' ? parseISO(dueDate) : dueDate;
-//     return {
-//       id: Date.now().toString(), // Unique identifier
-//       title,
-//       description,
-//       dueDate, // Date object (use date-fns to format)
-//       priority: priority || 'medium', // 'low', 'medium', 'high'
-//       notes: [],
-//       checklist: [],
-//       isComplete: false,
-//       toggleComplete() { this.isComplete = !this.isComplete; },
-//       updatePriority(newPriority) { this.priority = newPriority; },
-//     };
-//   };
+
   
 //   export default Todo;
 const Todo = (title, description, dueDate, priority) => {
@@ -25,9 +9,10 @@ const Todo = (title, description, dueDate, priority) => {
     description,
     dueDate, // Store as string (YYYY-MM-DD format)
     priority: priority || 'medium',
+    completed: true,
     notes: [],
     checklist: [],
-    completed: false,
+    
     
     // Methods
     toggleCompleted() {
@@ -45,5 +30,12 @@ const Todo = (title, description, dueDate, priority) => {
     }
   };
 };
+
+export const sampleTodo = Todo(
+  'Buy groceries',
+  'Milk, eggs, bread, fruits',
+  new Date().toISOString().split('T')[0],
+  'medium',false,
+);
 
 export default Todo;

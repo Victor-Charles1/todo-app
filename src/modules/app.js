@@ -84,7 +84,8 @@ export default class App {
     render() {
         const activeProject = this.getActiveProject();
         UI.renderProjects(this.projects, this.activeProjectId);
-        // const deleteBtn = document.getElementById('delete-project-btn');
+
+        const deleteBtn = document.getElementById('delete-project-btn');
         
         if (activeProject) {
             UI.renderTodos(activeProject.todos);
@@ -93,8 +94,14 @@ export default class App {
             document.getElementById('project-title').textContent = 'No Projects';
             document.getElementById('todos-container').innerHTML = 
                 '<p class="empty-state">Create a project to get started!</p>';
-                deleteBtn.classList.add('hidden');
+                 deleteBtn.classList.add('hidden');
         }
+         // Show "No Projects" state if default project was cleared
+    if (!activeProject && this.projects.length === 0) {
+      document.getElementById('project-title').textContent = 'No Projects';
+      document.getElementById('todos-container').innerHTML = 
+          '<p class="empty-state">Create a project to get started!</p>';
+  }
     }
 
     setupEventListeners() {
@@ -125,6 +132,23 @@ export default class App {
         document.getElementById('delete-project-btn').addEventListener('click', () => {
           this.deleteProject();
       });
+
+      // Clear storage button
+    document.getElementById('clear-storage-btn').addEventListener('click', () => {
+      if (confirm('Are you sure you want to clear ALL data? This action cannot be undone!')) {
+          Storage.clearAllData();
+          
+          // Reset application state
+          this.projects = [DefaultProject];
+          this.activeProjectId = DefaultProject.id;
+          
+          // Save and render
+          this.saveData();
+          this.render();
+          
+          alert('All data has been cleared. Application reset to default state.');
+      }
+  });
 
         // Add new todo
         document.getElementById('add-todo-btn').addEventListener('click', () => {
